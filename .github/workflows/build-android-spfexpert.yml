@@ -12,7 +12,12 @@ jobs:
       - name: Setup Node  
         uses: actions/setup-node@v3
         with:
-          node-version: '18'         
+          node-version: '18'
+
+      - name: Run Yarn Install
+        run: |
+             cd SampleLogin/
+             yarn install             
       - name: Build application
         run: |
              cd ./android
