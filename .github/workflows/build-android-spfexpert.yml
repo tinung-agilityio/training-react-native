@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
     branches: [main]
     # can add push and pull_request here 
+defaults:
+ run:
+  working-directory: SampleLogin
 
 jobs:
   build:
@@ -15,7 +18,6 @@ jobs:
           node-version: '18'
 
       - name: Run Yarn Install
-        working-directory: SampleLogin 
         run: |
              yarn install             
       - name: Build application
