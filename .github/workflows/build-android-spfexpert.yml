@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+    run:
+      shell: bash
+      working-directory: SampleLogin
     steps:
       - name: Setup Node  
         uses: actions/setup-node@v3
@@ -15,7 +19,6 @@ jobs:
           node-version: '18'
 
       - name: Run Yarn Install
-        working-directory: SampleLogin 
         run: |
              yarn install             
       - name: Build application
