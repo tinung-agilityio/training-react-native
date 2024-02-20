@@ -16,10 +16,11 @@ jobs:
 
       - name: Run Yarn Install
         run: |
+             cd SampleLogin
              yarn install             
       - name: Build application
         run: |
-             cd ./android
+             cd ./SampleLogin/android
              ./gradlew clean && ./gradlew assembleRelease     
       - name: Upload application
         uses: actions/upload-artifact@v2
