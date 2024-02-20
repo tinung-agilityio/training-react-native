@@ -16,7 +16,8 @@ jobs:
 
       - name: Run Yarn Install
         working-directory: ./SampleLogin 
-        run: yarn install             
+        run: |
+             yarn install             
       - name: Build application
         run: |
              cd ./SampleLogin/android
