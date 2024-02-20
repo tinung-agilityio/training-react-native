@@ -15,8 +15,9 @@ jobs:
           node-version: '18'
 
       - name: Run Yarn Install
-        run: |
-             ls     
+        run: 
+          working-directory: ./SampleLogin
+             yarn install             
       - name: Build application
         run: |
              cd ./SampleLogin/android
