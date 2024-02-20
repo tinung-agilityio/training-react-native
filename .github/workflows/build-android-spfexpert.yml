@@ -16,7 +16,6 @@ jobs:
 
       - name: Run Yarn Install
         run: 
-            shell: bash
             working-directory: ./SampleLogin
             yarn install             
       - name: Build application
