@@ -16,7 +16,7 @@ jobs:
 
       - name: Run Yarn Install
         run: |
-             pwd
+             ls
              cd SampleLogin
              yarn install             
       - name: Build application
