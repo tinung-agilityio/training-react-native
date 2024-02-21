@@ -28,7 +28,9 @@ jobs:
         run: chmod +x SampleLogin/android/gradlew
 
       - name: Execute Gradle command - assembleRelease
-        run: SampleLogin/android/gradlew assembleRelease
+        working-directory: SampleLogin/android
+        run: |
+             ./gradlew clean && ./gradlew assembleRelease    
 
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
