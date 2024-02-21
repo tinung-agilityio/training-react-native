@@ -14,39 +14,21 @@ jobs:
     name: Building and distributing app
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      # Set Current Date As Env Variable
-      - name: Set current date as env variable
-        run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-
-      # Set Repository Name As Env Variable
-      - name: Set repository name as env variable
-        run: echo "repository_name=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
-
-      - name: Install Java
-        uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
-          java-version: "17"
-          distribution: "adopt"
-          cache: "gradle"
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
-      - name: Setup Node  
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Make gradlew executable
+        run: chmod +x SampleLogin/android/gradlew
 
-      - name: Run Yarn Install
-        run: |
-             yarn install             
-      - name: Build application
-        working-directory: SampleLogin/android
-        run: |
-             ./gradlew clean && ./gradlew assembleRelease    
+      - name: Execute Gradle command - assembleRelease
+        run: SampleLogin/android/gradlew assembleRelease
 
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
