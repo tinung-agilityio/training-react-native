@@ -14,7 +14,7 @@ jobs:
     name: Building and distributing app
     runs-on: ubuntu-latest
     steps:
-       - name: Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Install Java
@@ -24,7 +24,7 @@ jobs:
           distribution: "adopt"
           cache: "gradle"
 
-       - name: Validate Gradle wrapper
+      - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
       - name: Setup Node  
