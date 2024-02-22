@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "251933613737",
+    "project_id": "samplelogin-d5e65",
+    "storage_bucket": "samplelogin-d5e65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251933613737:android:7e973b297c656805ca13b8",
+        "android_client_info": {
+          "package_name": "com.androidfactory.githubactionSampleLogin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0xh3ip6gXv88wSDlWmf9PxWEneLs5bTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
