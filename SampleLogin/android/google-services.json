@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:251933613737:android:7e973b297c656805ca13b8",
+        "mobilesdk_app_id": "1:251933613737:android:f73cff374c4ce7a6ca13b8",
         "android_client_info": {
-          "package_name": "com.androidfactory.githubactionSampleLogin"
+          "package_name": "com.samplelogin"
         }
       },
       "oauth_client": [],
