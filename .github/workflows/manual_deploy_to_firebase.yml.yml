@@ -33,7 +33,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x SampleLogin/android/gradlew
       - name: Execute Gradle command - assembleRelease
-        working-directory: SampleLogin/android
+        working-directory: android
         run: |
              ./gradlew clean && ./gradlew assembleRelease   
 
