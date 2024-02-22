@@ -8,6 +8,9 @@ on:
         required: true
         default: 'Manual Debug Build'
         description: 'Release Notes'
+defaults:
+ run:
+  working-directory: SampleLogin
 
 jobs:
   build:
