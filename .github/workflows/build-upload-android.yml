@@ -22,7 +22,7 @@ jobs:
      uses: timheuer/base64-to-file@v1
      id: service_account_json_file
      with:
-       fileName: "serviceAccount.json"
+       fileName: "google-services.json"
        encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
  
    - name: Decode Keystore File
