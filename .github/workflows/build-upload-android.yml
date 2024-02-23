@@ -29,13 +29,13 @@ jobs:
      uses: timheuer/base64-to-file@v1
      id: android_keystore
      with:
-       fileName: "android_keystore.keystore"
+       fileName: "sample-login.keystore"
        encodedString: ${{ secrets.KEYSTORE_FILE }}
  
    - name: Build & deploy Android release
      run: bundle exec fastlane android deploy
      env:
-       KEYSTORE_FILE: ${{ steps.android_keystore.outputs.filePath }}
+       KEYSTORE_FILE: ${{ steps.sample-login.outputs.filePath }}
        KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
        KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
        KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
