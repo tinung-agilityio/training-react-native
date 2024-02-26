@@ -2,7 +2,11 @@ name: Android Build & Deploy
  
 on:
  workflow_dispatch:
- 
+    branches: [main]
+defaults:
+ run:
+  working-directory: SampleLogin
+   
 jobs:
  deploy:
    runs-on: ubuntu-latest
@@ -30,6 +34,7 @@ jobs:
        encodedString: ${{ secrets.KEYSTORE_FILE }}
  
    - name: Build & deploy Android release
+     working-directory: SampleLogin/android
      run: bundle exec fastlane android deploy
      env:
        KEYSTORE_FILE: ${{ steps.sample-login.outputs.filePath }}
