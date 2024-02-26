@@ -80,12 +80,18 @@ jobs:
           key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
 
       - name: Grant Permission to Execute
-        run: chmod +x gradlew
+        run: chmod +x android/gradlew
 
-      - name: Build Release APK
-        run: ./gradlew assembleRelease
+       - name: Execute Gradle command - assembleRelease
+          working-directory: SampleLogin/android
+          run: |
+              ./gradlew clean && ./gradlew assembleRelease   
 
-      - name: Upload APK
-        run: |
-          extras fastlane
-          fastlane android distribute_firebase
+      - name: Upload Artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
+          groups: testers
+          file: SampleLogin/android/app/build/outputs/apk/release/app-release.apk
+          releaseNotes: ${{ inputs.release_notes }}
