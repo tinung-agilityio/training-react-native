@@ -63,10 +63,6 @@ jobs:
     runs-on: ubuntu-latest
     container: alvrme/alpine-android:android-33-jdk17
 
-  defaults:
-  run:
-    working-directory: SampleLogin/android
-
     steps:
       - uses: actions/checkout@v3
 
@@ -76,8 +72,8 @@ jobs:
           java-version: '17'
 
       - name: Run Yarn Install
-        run: |
-             yarn install      
+        working-directory: SampleLogin
+        run: yarn install      
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
