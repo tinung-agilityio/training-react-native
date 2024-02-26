@@ -18,10 +18,11 @@ jobs:
      with:
       ruby-version: '3.1' # Not needed with a .ruby-version file
       bundler-cache: true
+     working-directory: SampleLogin/android
+    
    - run: bundle install
 
    - name: Run tests
-     working-directory: SampleLogin/android
      run: bundle exec fastlane android test
 
    - name: Decode Service Account Key JSON File
