@@ -21,6 +21,7 @@ jobs:
    - run: bundle install
 
    - name: Run tests
+     working-directory: SampleLogin/android
      run: bundle exec fastlane android test
 
    - name: Decode Service Account Key JSON File
