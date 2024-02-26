@@ -6,7 +6,7 @@ on:
       branches: [main]     # matches every branch
 defaults:
  run:
-  working-directory: SampleLogin
+  working-directory: SampleLogin/android
 
 jobs:
   test:
@@ -48,8 +48,8 @@ jobs:
           node-version: '18'
 
       - name: Run Yarn Install
-        run: |
-             yarn install             
+        run: yarn install
+
       - name: Build application
         working-directory: SampleLogin/android
         run: |
@@ -67,20 +67,10 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
-      - name: Run Yarn Install
-        run: |
-             yarn install    
+          java-version: '17'  
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-
-      - name: Make gradlew executable
-        run: chmod +x android/gradlew
-
-      - name: Execute Gradle command - assembleRelease
-        working-directory: SampleLogin/android
-        run: |
-             ./gradlew clean && ./gradlew assembleRelease   
 
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
