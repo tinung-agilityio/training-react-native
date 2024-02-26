@@ -20,7 +20,7 @@ jobs:
       bundler-cache: true
    - run: gem install bundler
    - run: bundle install
-   
+   - run: bundle init
    - name: Decode Service Account Key JSON File
      uses: timheuer/base64-to-file@v1
      id: service_account_json_file
