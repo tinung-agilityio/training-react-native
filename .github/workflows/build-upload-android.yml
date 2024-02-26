@@ -29,7 +29,6 @@ jobs:
     
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
-      - working-directory: SampleLogin/android
       - uses: actions/checkout@v2
 
       - name: set up JDK 17
