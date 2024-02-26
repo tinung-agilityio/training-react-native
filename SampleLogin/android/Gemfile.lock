@@ -216,5 +216,8 @@ DEPENDENCIES
   fastlane
   fastlane-plugin-increment_version_code
 
+RUBY VERSION
+   ruby 3.0.3p157
+
 BUNDLED WITH
    2.5.6
