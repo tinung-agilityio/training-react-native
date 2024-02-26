@@ -62,10 +62,6 @@ jobs:
     runs-on: ubuntu-latest
     container: alvrme/alpine-android:android-33-jdk17
 
-  defaults:
-    run:
-      working-directory: SampleLogin
-
     steps:
       - uses: actions/checkout@v3
 
