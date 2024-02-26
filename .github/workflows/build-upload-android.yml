@@ -82,10 +82,10 @@ jobs:
       - name: Grant Permission to Execute
         run: chmod +x android/gradlew
 
-       - name: Execute Gradle command - assembleRelease
-          working-directory: SampleLogin/android
-          run: |
-              ./gradlew clean && ./gradlew assembleRelease   
+      - name: Execute Gradle command - assembleRelease
+        working-directory: SampleLogin/android
+        run: |
+            ./gradlew clean && ./gradlew assembleRelease   
 
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
