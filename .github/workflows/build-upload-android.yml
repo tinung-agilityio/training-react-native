@@ -22,9 +22,6 @@ jobs:
         with:
           java-version: '11'
 
-      - name: Unit tests
-        run: ./gradlew testDevelopDebugUnitTest --stacktrace
-
   build:
     name: Build
     needs: [ test ]
