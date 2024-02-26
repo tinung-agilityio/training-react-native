@@ -59,9 +59,8 @@ jobs:
 
   develop:
     name: Deploy on branch Develop
-    needs: [ build ]
     runs-on: ubuntu-latest
-    container: alvrme/alpine-android:android-33-jdk17
+    working-directory: SampleLogin
 
     steps:
       - uses: actions/checkout@v3
@@ -70,7 +69,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-
+      - name: Run Yarn Install
+        run: |
+             yarn install    
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
