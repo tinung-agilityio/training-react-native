@@ -48,19 +48,23 @@ jobs:
           node-version: '18'
 
       - name: Run Yarn Install
-        run: |
-             yarn install             
+        run: yarn install
+
       - name: Build application
         working-directory: SampleLogin/android
         run: |
              ./gradlew clean && ./gradlew assembleRelease   
-
       - run: echo "Build status report=${{ job.status }}."
 
   develop:
     name: Deploy on branch Develop
     needs: [ build ]
     runs-on: ubuntu-latest
+    container: alvrme/alpine-android:android-33-jdk17
+
+  defaults:
+    run:
+      working-directory: SampleLogin
 
     steps:
       - uses: actions/checkout@v3
@@ -69,11 +73,19 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Run Yarn Install
         run: |
              yarn install    
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-        
+
+      - name: Make gradlew executable
+        run: chmod +x android/gradlew
+
+      - name: Execute Gradle command - assembleRelease
+        working-directory: SampleLogin/android
+        run: |
+             ./gradlew clean && ./gradlew assembleRelease   
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
