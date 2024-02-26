@@ -2,8 +2,8 @@ name: Android CI
 
 on:
   push:
-    branches:
-      - [main]       # matches every branch
+    workflow_dispatch:
+      branches: [main]     # matches every branch
 defaults:
  run:
   working-directory: SampleLogin/android
