@@ -15,29 +15,21 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Android
 
-### android test
+### android build_develop
 
 ```sh
-[bundle exec] fastlane android test
+[bundle exec] fastlane android build_develop
 ```
 
-Runs all the tests
+Build To App Distribution
 
-### android deploy
+### android distribute_firebase
 
 ```sh
-[bundle exec] fastlane android deploy
+[bundle exec] fastlane android distribute_firebase
 ```
 
-Submit a new Beta Build to Crashlytics Beta
 
-### android fetch_and_increment_build_number
-
-```sh
-[bundle exec] fastlane android fetch_and_increment_build_number
-```
-
-Fetches the latest version code from the Play Console and increments it by 1
 
 ----
 

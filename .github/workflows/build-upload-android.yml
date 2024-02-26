@@ -1,53 +1,83 @@
-name: Android Build & Deploy
- 
+name: Android CI
+
 on:
- workflow_dispatch:
-    branches: [main]
+  push:
+    branches:
+      - [main]       # matches every branch
 defaults:
  run:
-  working-directory: SampleLogin
-   
-jobs:
- deploy:
-   runs-on: ubuntu-latest
-   steps:
-   - uses: actions/checkout@v2
- 
-   - name: Set up ruby env
-     uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
-     with:
-      ruby-version: '3.1' # Not needed with a .ruby-version file
-      bundler-cache: true    
-   - run: bundle install
-   - run: bundle update --bundler
+  working-directory: SampleLogin/android
 
-   - name: Decode Service Account Key JSON File
-     uses: timheuer/base64-to-file@v1
-     id: service_account_json_file
-     with:
-       fileName: "google-services.json"
-       encodedString: ${{ secrets.GPLAY_SERVICE_ACCOUNT_KEY_JSON }}
- 
-   - name: Decode Keystore File
-     uses: timheuer/base64-to-file@v1
-     id: android_keystore
-     with:
-       fileName: "sample-login.keystore"
-       encodedString: ${{ secrets.KEYSTORE_FILE }}
- 
-   - name: Build & deploy Android release
-     working-directory: SampleLogin/android
-     run: bundle exec fastlane android deploy
-     env:
-       KEYSTORE_FILE: ${{ steps.sample-login.outputs.filePath }}
-       KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-       KEY_ALIAS: ${{ secrets.KEY_ALIAS}}
-       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-       ANDROID_JSON_KEY_FILE: ${{ steps.service_account_json_file.outputs.filePath }}
- 
-   - name: Upload build artifacts
-     uses: actions/upload-artifact@v2
-     with:
-       name: assets
-       path: |
-         ${{ github.workspace }}/app/build/outputs/bundle/release
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v1
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+
+      - name: Unit tests
+        run: ./gradlew testDevelopDebugUnitTest --stacktrace
+
+  build:
+    name: Build
+    needs: [ test ]
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+      - uses: actions/checkout@v3
+
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle (dev debug)
+        run: ./gradlew buildDevelopDebugPreBundle --stacktrace
+
+      - run: echo "Build status report=${{ job.status }}."
+
+  develop:
+    name: Deploy on branch Develop
+    needs: [ build ]
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    container: alvrme/alpine-android:android-33-jdk11
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache Gradle
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches/
+          key: cache-clean-gradle-${{ matrix.os }}-${{ matrix.jdk }}
+
+      - name: Cache Gradle Wrapper
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/wrapper/
+          key: cache-clean-wrapper-${{ matrix.os }}-${{ matrix.jdk }}
+
+      - name: Grant Permission to Execute
+        run: chmod +x gradlew
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease
+
+      - name: Upload APK
+        run: |
+          extras fastlane
+          fastlane android distribute_firebase

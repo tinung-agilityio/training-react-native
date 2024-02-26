@@ -16,46 +16,25 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
+  desc "Build To App Distribution"
+    before_all do
+          clear_derived_data
+        end
+
+  lane :build_develop do
+      gradle(
+        task: 'assemble',
+        build_type: 'Release'
+      )
   end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :deploy do
-    fetch_and_increment_build_number
-
-    gradle(
-      task: "bundle", # or "assemble", if you want to build an APK
-      build_type: "release",
-      properties: {
-        "android.injected.signing.store.file" => ENV["KEYSTORE_FILE"],
-        "android.injected.signing.store.password" => ENV["KEYSTORE_PASSWORD"],
-        "android.injected.signing.key.alias" => ENV["KEY_ALIAS"],
-        "android.injected.signing.key.password" => ENV["KEY_PASSWORD"],
-      }  
-    )
-    
-    upload_to_play_store(
-      track: "internal",
-      json_key: ENV["ANDROID_JSON_KEY_FILE"]
-    )
+  lane :distribute_firebase do
+      build_develop
+      firebase_app_distribution(
+        app: "1:251933613737:android:f73cff374c4ce7a6ca13b8",
+        apk_path: "/android/app/build/outputs/apk/release/app-release.apk",
+        firebase_cli_token: "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"
+      )
   end
-
-  desc "Fetches the latest version code from the Play Console and increments it by 1"
-  lane :fetch_and_increment_build_number do
-    app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
-
-    version_codes = google_play_track_version_codes(
-      package_name: app_identifier,
-      track: "internal",
-      json_key: ENV["ANDROID_JSON_KEY_FILE"]
-    )
-    
-    updated_version_code = version_codes[0] + 1
-    
-    increment_version_code(
-      version_code: updated_version_code
-    )
-  end
+  
 end
