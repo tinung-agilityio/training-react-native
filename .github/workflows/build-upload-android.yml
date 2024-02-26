@@ -48,8 +48,8 @@ jobs:
           node-version: '18'
 
       - name: Run Yarn Install
-        run: yarn install
-
+        run: |
+             yarn install             
       - name: Build application
         working-directory: SampleLogin/android
         run: |
@@ -59,6 +59,7 @@ jobs:
 
   develop:
     name: Deploy on branch Develop
+    needs: [ build ]
     runs-on: ubuntu-latest
 
     steps:
@@ -67,11 +68,12 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'  
-
+          java-version: '17'
+        run: |
+             yarn install    
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-
+        
       - name: Upload Artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
