@@ -213,14 +213,15 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-partitions (~> 1.894)
-  aws-sdk-core (~> 3.191, >= 3.191.3)
-  base64 (~> 0.2.0)
+  aws-partitions (>= 1.894.0)
+  aws-sdk-core (>= 3.191.3)
+  base64 (>= 0.2.0)
   fastlane
-  fastlane-plugin-increment_version_code
-  nkf (~> 0.2.0)
-  rake (~> 13.1)
-  rexml (~> 3.2, >= 3.2.6)
+  fastlane-plugin-increment_version_code (~> 0.4)
+  json (>= 2.7.1)
+  nkf (>= 0.2.0)
+  rake (>= 13.1.0)
+  rexml (>= 3.2.6)
 
 RUBY VERSION
    ruby 3.0.3p157
