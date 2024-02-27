@@ -60,7 +60,6 @@ jobs:
     name: Deploy on branch Develop
     # needs: [ build ]
     runs-on: ubuntu-latest
-    container: alvrme/alpine-android:android-33-jdk17
 
     steps:
       - uses: actions/checkout@v3
