@@ -70,9 +70,10 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-        ∂
+        
       - name: Make gradlew executable
         run: chmod +x android/gradlew
+        
       - name: Execute Gradle command - assembleRelease
         working-directory: SampleLogin/android
         run: |
