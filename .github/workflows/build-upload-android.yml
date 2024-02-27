@@ -23,6 +23,7 @@ jobs:
           java-version: '17'
 
   build:
+    runs-on: macos-latest
     name: Build
     needs: [ test ]
     runs-on: ubuntu-latest
@@ -30,6 +31,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - run: fastlane beta
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
 
       - name: Install Java
         uses: actions/setup-java@v2
