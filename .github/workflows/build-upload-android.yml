@@ -58,7 +58,7 @@ jobs:
 
   develop:
     name: Deploy on branch Develop
-    needs: [ build ]
+    # needs: [ build ]
     runs-on: ubuntu-latest
     container: alvrme/alpine-android:android-33-jdk17
 
@@ -69,10 +69,8 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Run Yarn Install
-        working-directory: SampleLogin
-        run: |
-             yarn install  
-               
+        run: yarn install
+
       - name: Execute Gradle command - assembleRelease
         working-directory: SampleLogin/android
         run: |
