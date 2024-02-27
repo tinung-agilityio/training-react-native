@@ -69,6 +69,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Make gradlew executable
+        working-directory: SampleLogin/android
         run: chmod +x SampleLogin/android/gradlew
 
       - name: Execute Gradle command - assembleRelease
