@@ -58,7 +58,7 @@ jobs:
 
   develop:
     name: Deploy on branch Develop
-    needs: [ test ]
+    needs: [ build ]
     runs-on: ubuntu-latest
 
     steps:
@@ -68,7 +68,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-          
+
       - name: Run Yarn Install
         run: yarn install
 
