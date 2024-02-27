@@ -23,7 +23,6 @@ jobs:
           java-version: '17'
 
   build:
-    runs-on: macos-latest
     name: Build
     needs: [ test ]
     runs-on: ubuntu-latest
