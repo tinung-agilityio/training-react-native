@@ -70,6 +70,6 @@ jobs:
 
       - run : bundle install
       - name: Upload APK
-          working-directory: SampleLogin/android
+        working-directory: SampleLogin/android
         run: |
           bundle exec fastlane beta
