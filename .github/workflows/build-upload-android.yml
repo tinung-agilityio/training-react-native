@@ -56,7 +56,7 @@ jobs:
       #        ./gradlew clean && ./gradlew assembleRelease   
       - name: Install bundle
         run: |
-          bundle install
+          gem install bundler
       - name: Upload APK
         run: |
           bundle exec fastlane beta
