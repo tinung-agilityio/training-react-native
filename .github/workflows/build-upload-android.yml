@@ -30,44 +30,44 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Setup Node  
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
           java-version: 8
 
-      - name: Install npm dependencies
+      - name: Install Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "17"
+          distribution: "adopt"
+          cache: "gradle"
+
+      - name: Run Yarn Install
         run: |
           yarn install
       
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0.0'
-      # - name: Install Java
-      #   uses: actions/setup-java@v2
-      #   with:
-      #     java-version: "17"
-      #     distribution: "adopt"
-      #     cache: "gradle"
+      
+      - name: Build application
+        working-directory: SampleLogin/android
+        run: |
+             ./gradlew clean && ./gradlew assembleRelease   
 
-
-      # - name: Validate Gradle wrapper
-      #   uses: gradle/wrapper-validation-action@v1
-
-      # - name: Setup Node  
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '18'
-
-      # - name: Run Yarn Install
-      #   run: yarn install
-
-      # - name: Build application
-      #   working-directory: SampleLogin/android
-      #   run: |
-      #        ./gradlew clean && ./gradlew assembleRelease   
       - name: Install bundle
         run: |
           gem install bundler
+          
       - run : bundle install
       - name: Upload APK
         run: |
