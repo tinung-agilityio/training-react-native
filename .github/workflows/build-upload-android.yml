@@ -54,7 +54,9 @@ jobs:
       #   working-directory: SampleLogin/android
       #   run: |
       #        ./gradlew clean && ./gradlew assembleRelease   
-
+      - name: Install bundle
+        run: |
+          bundle install
       - name: Upload APK
         run: |
           bundle exec fastlane beta
