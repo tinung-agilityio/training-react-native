@@ -5,6 +5,7 @@ ruby ">= 2.7.0"
 
 # bound in the template on Cocoapods with next React Native release.
 gem 'fastlane'
+gem 'firebase'
 gem 'aws-partitions', '>= 1.894.0'
 gem 'aws-sdk-core', '>= 3.191.3'
 gem 'rexml', '>= 3.2.6'
@@ -12,6 +13,7 @@ gem 'nkf', '>= 0.2.0'
 gem 'base64', '>= 0.2.0'
 gem 'rake', '>= 13.1.0'
 gem 'fastlane-plugin-increment_version_code',  '~> 0.4'
+gem 'fastlane-plugin-firebase_app_distribution'
 gem 'json', '>= 2.7.1'
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
 eval_gemfile(plugins_path) if File.exist?(plugins_path)
