@@ -55,4 +55,7 @@ jobs:
         run: |
              ./gradlew clean && ./gradlew assembleRelease   
 
-      - run: fastlane beta
+      - name: Upload APK
+        run: |
+          extras fastlane
+          fastlane beta
