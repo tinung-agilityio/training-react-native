@@ -58,17 +58,17 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0.0'
-      
+
+      - name: Install bundle
+        run: |
+          gem install bundler
+      - run : bundle install
+
       - name: Build application
         working-directory: SampleLogin/android
         run: |
              ./gradlew clean && ./gradlew assembleRelease   
 
-      - name: Install bundle
-        run: |
-          gem install bundler
-
-      - run : bundle install
       - name: Upload APK
         working-directory: SampleLogin/android
         run: |
