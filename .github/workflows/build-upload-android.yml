@@ -57,5 +57,5 @@ jobs:
 
       - name: Upload APK
         run: |
-          fastlane add_plugin firebase_app_distribution
+          fastlane
           fastlane beta
