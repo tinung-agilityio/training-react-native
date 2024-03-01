@@ -58,7 +58,7 @@ jobs:
 
   develop:
     name: Deploy on branch Develop
-    needs: [ build ]
+    needs: [ test ]
     runs-on: ubuntu-latest
 
     steps:
