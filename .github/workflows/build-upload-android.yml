@@ -22,9 +22,43 @@ jobs:
         with:
           java-version: '17'
 
-  build:
+build:
     name: Build
     needs: [ test ]
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "17"
+          distribution: "adopt"
+          cache: "gradle"
+
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Setup Node  
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Run Yarn Install
+        run: yarn install
+
+      - name: Build application
+        working-directory: SampleLogin/android
+        run: |
+             ./gradlew clean && ./gradlew assembleRelease   
+      - run: echo "Build status report=${{ job.status }}."
+
+  develop:
+    name: Deploy on Firebase
+    needs: [ build ]
     runs-on: ubuntu-latest
     
     steps:
@@ -62,12 +96,7 @@ jobs:
       - name: Install bundle
         run: |
           gem install bundler
-      - run : bundle install
-
-      - name: Build application
-        working-directory: SampleLogin/android
-        run: |
-             ./gradlew clean && ./gradlew assembleRelease   
+      - run : bundle install  
 
       - name: Upload APK
         working-directory: SampleLogin/android
