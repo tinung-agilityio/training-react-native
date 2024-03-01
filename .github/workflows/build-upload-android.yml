@@ -22,7 +22,7 @@ jobs:
         with:
           java-version: '17'
 
-build:
+  build:
     name: Build
     needs: [ test ]
     runs-on: ubuntu-latest
@@ -56,8 +56,8 @@ build:
              ./gradlew clean && ./gradlew assembleRelease   
       - run: echo "Build status report=${{ job.status }}."
 
-develop:
-    name: Deploy on Firebase
+  develop:
+    name: Deploy on branch Develop
     needs: [ build ]
     runs-on: ubuntu-latest
 
