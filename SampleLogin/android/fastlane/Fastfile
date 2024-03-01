@@ -2,11 +2,17 @@ default_platform(:android)
 
 platform :android do
 
+  lane :install_packages do
+    yarn(
+      command: 'install'
+    )
+  end
+
   lane :beta do
     release = firebase_app_distribution(
         app: "1:251933613737:android:f73cff374c4ce7a6ca13b8",
-        service_credentials_file: "/Users/tintrung/training/training-react-native/training-react-native/SampleLogin/android/samplelogin-d5e65-650997352592.json",
-        apk_path: "/Users/tintrung/training/training-react-native/training-react-native/SampleLogin/android/app/build/outputs/apk/release/app-release.apk",
+        service_credentials_file: "android/samplelogin-d5e65-650997352592.json",
+        apk_path: "app/build/outputs/apk/release/app-release.apk",
         debug: true
     )
   end  
