@@ -11,7 +11,7 @@ platform :android do
   lane :beta do
     release = firebase_app_distribution(
         app: "1:251933613737:android:f73cff374c4ce7a6ca13b8",
-        service_credentials_file: "android/samplelogin-d5e65-650997352592.json",
+        service_credentials_file: "./samplelogin-d5e65-650997352592.json",
         apk_path: "app/build/outputs/apk/release/app-release.apk",
         debug: true
     )
