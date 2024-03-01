@@ -56,7 +56,7 @@ build:
              ./gradlew clean && ./gradlew assembleRelease   
       - run: echo "Build status report=${{ job.status }}."
 
-  develop:
+develop:
     name: Deploy on Firebase
     needs: [ build ]
     runs-on: ubuntu-latest
